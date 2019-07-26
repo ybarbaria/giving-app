@@ -6,7 +6,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<mat-card *ngFor="let item of toGives; let i = index">
+  <mat-card-title>
+    {{ item.type }}
+  </mat-card-title>
+  <mat-card-content>
+
+  </mat-card-content>
+</mat-card>
+
+<!-- <ion-content>
     <ion-card class="welcome-card">
       <ion-img src="/assets/shapes.svg"></ion-img>
       <ion-card-header>
@@ -38,4 +47,4 @@
         <ion-label>Theme Your App</ion-label>
       </ion-item>
     </ion-list>
-</ion-content>
+</ion-content> -->
