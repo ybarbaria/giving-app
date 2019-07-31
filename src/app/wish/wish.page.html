@@ -1,0 +1,12 @@
+<ion-content>
+    <ion-list lines="none">
+        <ion-item *ngFor="let item of wishes; let i = index">
+            <ion-img [src]="'assets/test-img/test1.JPG'"></ion-img>
+            <ion-label>{{item.title}}</ion-label>
+            <!-- <button ion-button icon-only clear color="transparent" >
+            </button> -->
+            <ion-icon slot="end" color="medium" name="remove" (click)="test(item)"></ion-icon>
+            <ion-icon slot="end" color="medium" name="text" (click)="test(item)"></ion-icon>
+        </ion-item>
+    </ion-list>
+</ion-content>

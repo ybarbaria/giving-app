@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GivesPage } from './gives.page';
 import { MatCardModule } from '@angular/material/card';
+import { GiveDetailsPage } from './give-details/give-details.page';
 
 @NgModule({
   imports: [
@@ -14,6 +15,9 @@ import { MatCardModule } from '@angular/material/card';
     MatCardModule,
     RouterModule.forChild([{ path: '', component: GivesPage }])
   ],
-  declarations: [GivesPage]
+  entryComponents: [
+    GiveDetailsPage
+  ],
+  declarations: [GivesPage, GiveDetailsPage]
 })
 export class GivesPageModule { }

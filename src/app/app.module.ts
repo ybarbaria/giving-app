@@ -13,6 +13,10 @@ import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const config: SocketIoConfig = {
   url: 'http://localhost:8080', options: {
@@ -21,10 +25,19 @@ const config: SocketIoConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule, MatCardModule, SocketIoModule.forRoot(config)],
+  imports: [BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    SocketIoModule.forRoot(config)],
   providers: [
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
