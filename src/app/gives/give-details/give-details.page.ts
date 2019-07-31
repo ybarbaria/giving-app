@@ -9,24 +9,12 @@ import { ViewController } from '@ionic/core';
     styleUrls: ['give-details.page.scss']
 })
 export class GiveDetailsPage {
-    public give: Give;
-
-    constructor(public navParams: NavParams, public modalCtrl: ModalController) {
+    give: Give;
+    isWish = false;
+    isAvailable = true;
+    constructor(private navParams: NavParams, public modalCtrl: ModalController) {
         this.give = navParams.get('give');
-    }
-
-    // share() {
-    //     const loader = this.loadingCtrl.create({
-    //         // content: 'Sharing....',
-    //         showBackdrop: true,
-    //         duration: 200
-    //     });
-    //     loader.then((page) => page.present());
-    // }
-
-    dismiss() {
-        // using the injected ModalController this page
-        // can "dismiss" itself and optionally pass back data
-        this.modalCtrl.dismiss();
+        this.isWish = navParams.get('isWish');
+        this.isAvailable = this.give.status !== 'gived';
     }
 }

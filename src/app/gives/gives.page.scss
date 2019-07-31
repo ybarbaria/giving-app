@@ -10,6 +10,7 @@ ion-item {
   ion-grid {
     padding: 0;
     width: 40%;
+    height: 100%;
 
     ion-col {
       padding: 0;
@@ -23,9 +24,9 @@ ion-item {
         }
       }
 
-      // ion-icon {
-      //   width: auto;
-      // }
+      ion-icon {
+        font-size: 18px;
+      }
     }
   }
 }

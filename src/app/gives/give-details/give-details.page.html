@@ -8,7 +8,12 @@
     </ion-toolbar>
 </ion-header>
 <ion-content fullscreen padding scroll-y="false">
-    {{give.description}}
+
+    <ion-icon name="heart" *ngIf="!isWish; else elseWish"></ion-icon>
+    <ng-template #elseWish>
+        <ion-icon name="remove-circle"></ion-icon>
+    </ng-template>
+    <ion-icon name="text" *ngIf="isAvailable"></ion-icon>
 
     <ion-slides [pager]="true">
 
@@ -25,4 +30,7 @@
         </ion-slide>
 
     </ion-slides>
+
+    <p>{{give.description}}</p>
+
 </ion-content>
