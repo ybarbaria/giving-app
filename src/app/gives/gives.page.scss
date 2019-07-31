@@ -1,15 +1,31 @@
 ion-item {
+
   height: 20vh;
-  margin-top: 10px;
+  margin-top: 4px;
 
-  .give-detail {
-    ion-img {
-      width: 25vh;
-    }
+  ion-img {
+    width: 60%;
+  }
 
-    ion-label {
-      padding: 4px;
-      margin: 0;
+  ion-grid {
+    padding: 0;
+    width: 40%;
+
+    ion-col {
+      padding: 0;
+
+      ion-label {
+        padding: 4px;
+        margin: 0;
+
+        h2 {
+          font-size: 14px;
+        }
+      }
+
+      // ion-icon {
+      //   width: auto;
+      // }
     }
   }
 }

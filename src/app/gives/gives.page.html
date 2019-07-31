@@ -8,9 +8,20 @@
   <ion-list lines="none">
     <ion-item *ngFor="let item of toGives; let i = index" (click)="openDetailModal(item._id)">
       <ion-img [src]="'assets/test-img/test1.JPG'"></ion-img>
-      <ion-label>{{item.title}}</ion-label>
-      <ion-icon slot="end" color="medium" name="heart"></ion-icon>
-      <ion-icon slot="end" color="medium" name="basket"></ion-icon>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>
+              <h2>{{item.title}}</h2>
+              <p>{{item.description}}</p>
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-icon name="heart"></ion-icon>
+            <ion-icon name="basket"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
 
   </ion-list>

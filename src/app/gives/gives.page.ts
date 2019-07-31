@@ -4,7 +4,6 @@ import { GivesService } from '../_services/gives.service';
 import { Give } from '../_models';
 import { ModalController } from '@ionic/angular';
 import { GiveDetailsPage } from './give-details/give-details.page';
-
 @Component({
   selector: 'app-gives',
   templateUrl: 'gives.page.html',
@@ -14,6 +13,7 @@ export class GivesPage implements OnInit {
 
   toGives: Give[] = [];
   private socket: Socket;
+  private detailsModal;
 
   constructor(socket: Socket,
     private givesService: GivesService,
@@ -34,14 +34,14 @@ export class GivesPage implements OnInit {
     // });
   }
 
-  openDetailModal(idGive: string) {
+  async openDetailModal(idGive: string) {
     const selectedGive = this.toGives.find((give) => {
       return give._id === idGive;
     });
-    const details = this.modalCtrl.create({
+    const modal = await this.modalCtrl.create({
       component: GiveDetailsPage,
       componentProps: { give: selectedGive }
     });
-    details.then((page) => page.present());
+    return await modal.present();
   }
 }
