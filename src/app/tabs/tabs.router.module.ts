@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'create',
+        children: [
+          {
+            path: '',
+            loadChildren: '../gives/create-give/create-give.module#GiveCreatePageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/gives',
         pathMatch: 'full'

@@ -4,17 +4,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GivesPage } from './gives.page';
-import { MatCardModule } from '@angular/material/card';
 import { GiveDetailsPage } from './give-details/give-details.page';
-import { ChatDetailsPage } from '../chat/chat-details/chat-details.page';
-import { ChatPageModule } from '../chat/chat.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    MatCardModule,
+    ReactiveFormsModule,
     RouterModule.forChild([{ path: '', component: GivesPage }])
   ],
   entryComponents: [

@@ -32,6 +32,15 @@ ion-item {
 }
 
 
+
+// .card-container {
+//   display: flex;
+//   flex-direction: column;
+
 ion-card {
+  width: 50%;
   margin: 0;
+  margin-top: 8px;
 }
+
+// }

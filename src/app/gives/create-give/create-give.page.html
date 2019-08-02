@@ -1,0 +1,37 @@
+<ion-content>
+
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+        <!-- TODO : ajouter l'upload d'images -->
+        <ion-grid>
+            <ion-row>
+                <!-- <ion-label for="title">Title</ion-label> -->
+                <ion-input formControlName="title" class="form-control" placeholder="Title">
+                </ion-input>
+            </ion-row>
+            <ion-row>
+                <!-- <ion-label for="title">Description</ion-label> -->
+                <ion-textarea formControlName="description" class="form-control" placeholder="Description">
+                </ion-textarea>
+            </ion-row>
+            <ion-row>
+                <!-- <ion-label for="title">Category</ion-label> -->
+                <ion-select formControlName="category" class="form-control" placeholder="Category">
+                    <ion-select-option>High-tech</ion-select-option>
+                    <ion-select-option>Clothes</ion-select-option>
+                    <ion-select-option>Lifestyle</ion-select-option>
+                </ion-select>
+                <!-- <div *ngIf="submitted && createForm.title.errors" class="invalid-feedback">
+                                            <div *ngIf="createForm.title.errors.required">Title is required</div>
+                                        </div> -->
+            </ion-row>
+            <!-- <div *ngIf="error" class="alert alert-danger">{{error}}</div> -->
+        </ion-grid>
+    </form>
+
+</ion-content>
+
+<ion-footer>
+    <ion-button clear color="white">
+        Save
+    </ion-button>
+</ion-footer>
