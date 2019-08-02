@@ -3,15 +3,19 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab3Page } from './tab3.page';
+import { ChatPage } from './chat.page';
+import { ChatDetailsPage } from './chat-details/chat-details.page';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: Tab3Page }])
+    RouterModule.forChild([{ path: '', component: ChatPage }])
   ],
-  declarations: [Tab3Page]
+  entryComponents: [
+    ChatDetailsPage
+  ],
+  declarations: [ChatPage, ChatDetailsPage]
 })
-export class Tab3PageModule {}
+export class ChatPageModule { }

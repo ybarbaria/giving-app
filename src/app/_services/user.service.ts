@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { RestApiService } from './rest-api.service';
 import { Observable } from 'rxjs';
-import { Give } from '../_models';
+import { Give, User } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -11,5 +11,9 @@ export class UserService {
 
     constructor(socket: Socket, public api: RestApiService) {
         this.socket = socket;
+    }
+
+    getUser(idUser: string): Observable<User> {
+        return this.api.getUser(idUser);
     }
 }

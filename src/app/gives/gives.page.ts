@@ -10,7 +10,7 @@ import { AuthenticationService } from '../_services/auth.service';
   templateUrl: 'gives.page.html',
   styleUrls: ['gives.page.scss']
 })
-export class GivesPage implements OnInit {
+export class GivesPage {
 
   toGives: Give[] = [];
   private socket: Socket;
@@ -21,10 +21,8 @@ export class GivesPage implements OnInit {
     private modalCtrl: ModalController,
     private authService: AuthenticationService) {
     this.socket = socket;
-  }
 
-  ngOnInit() {
-    // all object available 
+    // all object available
     this.givesService.getGives().subscribe((gives) => {
       this.toGives = gives;
     });
@@ -36,15 +34,10 @@ export class GivesPage implements OnInit {
     this.givesService.getNewGives().subscribe((give) => {
       this.toGives.push(give);
     });
-
-
-    // this.socket.on('gives-updated', (give) => {
-    //   this.toGives.find(give);
-    // });
   }
 
   async openDetailModal(giveModal: Give) {
-    let wish = false
+    let wish = false;
     if (this.wishes.length) {
       wish = this.wishes.find((give) => give._id === giveModal._id) ? true : false;
     }

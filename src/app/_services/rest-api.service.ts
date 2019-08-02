@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-import { Give } from '../_models';
+import { catchError } from 'rxjs/operators';
+import { Give, Message, User } from '../_models';
 
 @Injectable({
     providedIn: 'root'
@@ -37,9 +37,31 @@ export class RestApiService {
             );
     }
 
+    getUser(idUser: string): Observable<User> {
+        return this.http.get<User>(this.apiURL + '/users/' + idUser)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     // /:id/unwish/:idGive
     unwishes(idUser: string, idGive: string) {
         return this.http.put(this.apiURL + '/users/' + idUser + '/unwish/' + idGive, this.httpOptions).pipe(
+            catchError(this.handleError)
+        );
+    }
+
+
+    // Messages API
+    getMessages(idUser: string): Observable<Message[]> {
+        return this.http.get<Array<Message>>(this.apiURL + '/messages/user/' + idUser)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    sendMessage(message: Message): Observable<Message> {
+        return this.http.post<Message>(this.apiURL + '/messages/', JSON.stringify(message), this.httpOptions).pipe(
             catchError(this.handleError)
         );
     }
@@ -100,7 +122,7 @@ export class RestApiService {
             // Get server-side error
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
-        // TODO send error to api, manage log error dans la base. 
+        // TODO send error to api, manage log error dans la base.
         console.log(errorMessage);
         return throwError(errorMessage);
     }

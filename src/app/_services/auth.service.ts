@@ -8,7 +8,7 @@ import { User } from '../_models';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
-    private apiURL = 'http://localhost:8080'; // todo gérer l'url dans le fichier de config
+    private apiURL = 'http://localhost:8080'; // TODO gérer l'url dans le fichier de config
     public currentUser: Observable<User>;
 
     constructor(private http: HttpClient) {

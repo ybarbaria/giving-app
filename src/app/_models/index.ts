@@ -30,5 +30,6 @@ export class Message {
     _id: string;
     text: string;
     createdDate: Date;
-    users: Array<User>;
+    sender: string;
+    receiver: string;
 }
