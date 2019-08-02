@@ -47,4 +47,12 @@ export class GivesPage {
     });
     return await modal.present();
   }
+
+  addToWishList(give: Give) {
+    this.givesService.addToWish(give._id, this.authService.currentUserValue._id).subscribe();
+  }
+
+  removeFromWishList(give: Give) {
+    this.givesService.unwish(give._id, this.authService.currentUserValue._id).subscribe();
+  }
 }

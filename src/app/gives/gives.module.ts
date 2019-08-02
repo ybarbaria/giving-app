@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { GivesPage } from './gives.page';
 import { MatCardModule } from '@angular/material/card';
 import { GiveDetailsPage } from './give-details/give-details.page';
+import { ChatDetailsPage } from '../chat/chat-details/chat-details.page';
+import { ChatPageModule } from '../chat/chat.module';
 
 @NgModule({
   imports: [

@@ -44,8 +44,15 @@ export class RestApiService {
             );
     }
 
+    // /:id/wish/:idGive
+    wish(idUser: string, idGive: string) {
+        return this.http.put(this.apiURL + '/users/' + idUser + '/wish/' + idGive, this.httpOptions).pipe(
+            catchError(this.handleError)
+        );
+    }
+
     // /:id/unwish/:idGive
-    unwishes(idUser: string, idGive: string) {
+    unwish(idUser: string, idGive: string) {
         return this.http.put(this.apiURL + '/users/' + idUser + '/unwish/' + idGive, this.httpOptions).pipe(
             catchError(this.handleError)
         );

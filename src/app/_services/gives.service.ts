@@ -24,14 +24,18 @@ export class GivesService {
     }
 
     public getNewGives(): Observable<Give> {
-        return Observable.create((observer) => {
+        return new Observable((observer) => {
             this.socket.on('gives-added', (give) => {
                 observer.next(give);
             });
         });
     }
 
+    public addToWish(idGive: string, idUser: string) {
+        return this.api.wish(idUser, idGive);
+    }
+
     public unwish(idGive: string, idUser: string) {
-        return this.api.unwishes(idGive, idUser);
+        return this.api.unwish(idUser, idGive);
     }
 }

@@ -6,7 +6,7 @@ export class Give {
     // location: TODO add geonJson
     description: string;
     status: string;
-    user: User;
+    user: string;
     givedTo: string;
     picture1: string;
     picture2: string;
