@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { User } from '../_models';
+import { Socket } from 'ngx-socket-io';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
-    private apiURL = 'http://localhost:8080'; // TODO gérer l'url dans le fichier de config
+    private apiURL = 'https://sleepy-thicket-33930.herokuapp.com'; // TODO gérer l'url dans le fichier de config
+    //private apiURL = 'http://localhost:8080';
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private socket: Socket) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -20,8 +22,8 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${this.apiURL}/users/authenticate`, { username, password })
+    login(mail: string, password: string) {
+        return this.http.post<User>(`${this.apiURL}/users/authenticate`, { mail, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
@@ -38,5 +40,22 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+        this.socket.removeAllListeners();
+        this.socket.disconnect();
+    }
+
+    register(userRegister: User): Observable<User> {
+        return this.http.post<User>(`${this.apiURL}/users/register`, userRegister).pipe(
+            map((user: User) => {
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    // await this.storage.set("ACCESS_TOKEN", res.user.access_token);
+                    // await this.storage.set("EXPIRES_IN", res.user.expires_in);
+                    this.currentUserSubject.next(user);
+                }
+                return user;
+            })
+
+        );
     }
 }

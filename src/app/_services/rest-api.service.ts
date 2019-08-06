@@ -11,7 +11,8 @@ import { Give, Message, User } from '../_models';
 export class RestApiService {
 
     // Define API
-    private apiURL = 'http://localhost:8080';
+    private apiURL = 'https://sleepy-thicket-33930.herokuapp.com';
+    // private apiURL = 'http://localhost:8080';
     // Http Options
     private httpOptions = {
         headers: new HttpHeaders({

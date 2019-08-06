@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.page';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
@@ -13,6 +13,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  { path: 'register', loadChildren: './auth/register/register.module#RegisterPageModule' },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { MessagesService } from '../../_services/messages.service';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, IonContent } from '@ionic/angular';
 import { AuthenticationService } from '../../_services/auth.service';
 import { User, Message } from '../../_models';
 
@@ -10,13 +10,13 @@ import { User, Message } from '../../_models';
     templateUrl: 'chat-details.page.html',
     styleUrls: ['chat-details.page.scss']
 })
-export class ChatDetailsPage {
+export class ChatDetailsPage implements AfterViewInit {
     currentUser: User;
     user: User;
     messages: Message[];
     message: Message = new Message();
     text: string;
-
+    @ViewChild('messagesContent') messagesContent: IonContent;
 
     constructor(private navParams: NavParams,
         private socket: Socket,
@@ -30,6 +30,7 @@ export class ChatDetailsPage {
 
         this.messagesService.getNewMessages(this.user._id).subscribe((give) => {
             this.messages.push(give);
+            this.messagesContent.scrollToBottom();
         });
 
         this.messagesService.getUpdatedMessages(this.user._id).subscribe((mess) => {
@@ -41,7 +42,12 @@ export class ChatDetailsPage {
         });
     }
 
+    ngAfterViewInit(): void {
+        this.messagesContent.scrollToBottom();
+    }
+
     sendMessage() {
+        this.messagesContent.scrollToBottom();
         this.message.text = this.text;
         this.message.sender = this.currentUser._id;
         this.message.receiver = this.user._id;

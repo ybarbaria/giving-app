@@ -1,5 +1,7 @@
 {
   "name": "Giving",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

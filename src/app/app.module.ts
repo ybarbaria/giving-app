@@ -11,15 +11,20 @@ import { AppComponent } from './app.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 const config: SocketIoConfig = {
-  url: 'http://localhost:8080', options: {
+  url: 'https://sleepy-thicket-33930.herokuapp.com', options: {
     query: 'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZDE4NDJkMDE2NzAwYzU0NDRlYTU4MjgiLCJpYXQiOjE1NjMzNDkxMzh9.hVGgDk3wZTl5XUuX0goz2yE-2uIh9f75X8Kie2g7qCc'
   }
 };
@@ -33,6 +38,7 @@ const config: SocketIoConfig = {
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
+    FormsModule,
     ReactiveFormsModule,
     SocketIoModule.forRoot(config)],
   providers: [
@@ -40,7 +46,12 @@ const config: SocketIoConfig = {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera,
+    File,
+    WebView,
+    FilePath,
+    Facebook
   ],
   bootstrap: [AppComponent]
 })
