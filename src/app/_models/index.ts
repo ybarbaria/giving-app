@@ -19,11 +19,13 @@ export class User {
     password: string;
     firstName: string;
     lastName: string;
+    email: string;
     token?: string;
     phone: number;
     address: string;
     messages: Array<Message>;
     wishGives: Array<Give>;
+    type: string;
 }
 
 export class Message {

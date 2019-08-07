@@ -19,7 +19,9 @@
                     <div padding>
                         <ion-button type="submit" [disabled]="form.invalid" expand="block">Login
                         </ion-button>
-                        <ion-button full (click)="loginAction();" class="facebook-btn">Login with Facebook</ion-button>
+                        <ion-button (click)="loginWithFacebook()" expand="block">Login with
+                            Facebook
+                        </ion-button>
                     </div>
                     <ion-row>
                         <div text-center>

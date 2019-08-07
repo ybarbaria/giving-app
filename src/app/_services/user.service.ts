@@ -3,7 +3,6 @@ import { Socket } from 'ngx-socket-io';
 import { RestApiService } from './rest-api.service';
 import { Observable } from 'rxjs';
 import { Give, User } from '../_models';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -11,8 +10,7 @@ export class UserService {
     private socket: Socket;
 
     constructor(socket: Socket,
-        public api: RestApiService,
-        private fb: Facebook) {
+        public api: RestApiService) {
         this.socket = socket;
     }
 

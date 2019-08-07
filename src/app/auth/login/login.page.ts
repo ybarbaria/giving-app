@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../_services/auth.service';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @Component({
     templateUrl: 'login.page.html',
@@ -30,5 +31,14 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(form.value.mail, form.value.password).subscribe((res) => {
             this.router.navigateByUrl(this.returnUrl);
         });
+    }
+
+    loginWithFacebook() {
+        this.authenticationService.loginWithFacebook().subscribe(
+            (res) => {
+                this.router.navigateByUrl(this.returnUrl);
+            },
+            (err) => { console.log(err); }
+        );
     }
 }
