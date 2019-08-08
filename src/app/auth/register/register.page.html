@@ -1,67 +1,66 @@
 <ion-content padding>
 
   <form [formGroup]="registerForm" (ngSubmit)="register()">
-   <ion-grid>
-            <ion-row justify-content-center>
-                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-                  <div text-center>
-                        <h3>Sign Up</h3>
-                    </div>
-    <!-- <ion-col align-self-center size-md="6" size-lg="5" size-xs="12"> -->
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-md=" 6" size-lg="5" size-xs="12">
 
-    <ion-item padding>
-      <ion-label position="floating" color="secondary">First Name</ion-label>
-      <ion-input formControlName="firstName" type="text"
-        [class.invalid]="firstNameCtrl.dirty && firstNameCtrl.hasError('required')">
-      </ion-input>
-    </ion-item>
+          <div text-center>
+            <h3>Sign Up</h3>
+          </div>
 
-    <ion-item padding>
-      <ion-label position="floating" color="secondary">Last Name</ion-label>
-      <ion-input formControlName="lastName" type="text"
-        [class.invalid]="lastNameCtrl.dirty && lastNameCtrl.hasError('required')">
-      </ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label position="floating">First Name</ion-label>
+            <ion-input formControlName="firstName" type="text" [class.invalid]="firstNameCtrl.hasError('required')">
+            </ion-input>
+          </ion-item>
 
-    <ion-item padding>
-      <ion-label position="floating" color="secondary">Email</ion-label>
-      <ion-input formControlName="email" type="text"
-        [class.invalid]="emailCtrl.dirty && emailCtrl.hasError('required')">
-      </ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label position="floating">Last Name</ion-label>
+            <ion-input formControlName="lastName" type="text"
+              [class.invalid]=" lastNameCtrl.invalid && lastNameCtrl.hasError('required')">
+            </ion-input>
+          </ion-item>
 
-    <div formGroupName="passwordForm" padding>
-      <ion-item>
-        <ion-label position="floating" color="secondary">Password</ion-label>
-        <ion-input name="password" type="password" formControlName="password"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" color="secondary">Confirm password</ion-label>
-        <ion-input name="confirm" type="password" formControlName="confirm"></ion-input>
-      </ion-item>
-    </div>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="text"
+              [class.invalid]="emailCtrl.touched && emailCtrl.hasError('required')">
+            </ion-input>
+          </ion-item>
 
- 
-     <div padding>
-                      <ion-button type="submit" [disabled]="registerForm.invalid">Get started
-      </ion-button>
-                    </div>
-    </ion-col>
-            </ion-row>
-        </ion-grid>
+          <ng-container formGroupName="passwordForm">
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input name="password" type="password" formControlName="password"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Confirm password</ion-label>
+              <ion-input name="confirm" type="password" formControlName="confirm"></ion-input>
+            </ion-item>
+          </ng-container>
+
+
+          <div padding>
+            <ion-button type="submit" [disabled]="registerForm.invalid">Get started
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>
 
 <ion-footer>
-    <!-- <ion-text *ngIf="emailCtrl.hasError('required')">Email is required.</ion-text> -->
- <!-- <ion-text *ngIf="passwordCtrl.hasError('required')">Password is required.</ion-text> -->
-          <ion-text *ngIf="passwordCtrl.hasError('pattern')">Must contain at least : 1 uppercase char, 1 number
-            and 1 lowercase char.</ion-text>
-          <ion-text *ngIf="passwordCtrl.hasError('length')">Must contain more than 6 characters</ion-text>
- <!-- <ion-text *ngIf="confirmCtrl.hasError('required')">Confirm your password.</ion-text> -->
-          <ion-text *ngIf="confirmCtrl.hasError('matchingError')">Your password does not match</ion-text>
- <!-- <ion-text *ngIf="passwordCtrl.hasError('required')">Password is required.</ion-text> -->
-          <ion-text *ngIf="passwordCtrl.hasError('pattern')">Must contain at least : 1 uppercase char, 1 number
-            and 1 lowercase char.</ion-text>
-          <ion-text *ngIf="passwordCtrl.hasError('length')">Must contain more than 6 characters</ion-text>
+  <!-- <ion-text *ngIf="emailCtrl.hasError('required')">Email is required.</ion-text> -->
+  <!-- <ion-text *ngIf="passwordCtrl.hasError('required')">Password is required.</ion-text> -->
+  <ion-text *ngIf="passwordCtrl.hasError('pattern')">Must contain at least : 1 uppercase char, 1 number
+    and 1 lowercase char.</ion-text>
+  <ion-text *ngIf="passwordCtrl.hasError('length')">Must contain more than 6 characters</ion-text>
+  <!-- <ion-text *ngIf="confirmCtrl.hasError('required')">Confirm your password.</ion-text> -->
+  <ion-text *ngIf="confirmCtrl.hasError('matchingError')">Your password does not match</ion-text>
+  <!-- <ion-text *ngIf="passwordCtrl.hasError('required')">Password is required.</ion-text> -->
+  <ion-text *ngIf="passwordCtrl.hasError('pattern')">Must contain at least : 1 uppercase char, 1 number
+    and 1 lowercase char.</ion-text>
+  <ion-text *ngIf="passwordCtrl.hasError('length')">Must contain more than 6 characters</ion-text>
 </ion-footer>

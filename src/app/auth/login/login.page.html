@@ -19,14 +19,20 @@
                     <div padding>
                         <ion-button type="submit" [disabled]="form.invalid" expand="block">Login
                         </ion-button>
+                    </div>
+                    <div padding>
                         <ion-button (click)="loginWithFacebook()" expand="block">Login with
                             Facebook
+                            <ion-icon slot="start" name="logo-facebook">
+                            </ion-icon>
                         </ion-button>
                     </div>
                     <ion-row>
                         <div text-center>
-                            If you don't have an account, please <a routerLink='/register'>
-                                register</a> first!
+                            <p>
+                                If you don't have an account, please <a routerLink='/register'>
+                                    register</a> first!
+                            </p>
                         </div>
                     </ion-row>
                 </ion-col>

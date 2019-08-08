@@ -50,38 +50,19 @@ export class AuthenticationService {
     }
 
     register(userRegister: User, facebook = false): Observable<User> {
-        if (!facebook) {
-            return this.http.post<User>(`${this.apiURL}/users/register`, userRegister).pipe(
-                map((user: User) => {
-                    if (user) {
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-                        // await this.storage.set("ACCESS_TOKEN", res.user.access_token);
-                        // await this.storage.set("EXPIRES_IN", res.user.expires_in);
-                        this.currentUserSubject.next(user);
-                    }
-                    return user;
-                })
-
-            );
-        } else {
-            try {
-                return this.http.post<User>(`${this.apiURL}/users/authenticate/facebook`, userRegister)
-                    .pipe(map(
-                        user => {
-                            // login successful if there's a jwt token in the response
-                            if (user && user.token) {
-                                // store user details and jwt token in local storage to keep user
-                                // logged in between page refreshes
-                                localStorage.setItem('currentUser', JSON.stringify(user));
-                                this.currentUserSubject.next(user);
-                            }
-                            return user;
-                        }
-                    ));
-            } catch (exception) {
-                console.log(exception);
-            }
-        }
+        const uri = !facebook ? `${this.apiURL}/users/register` : `${this.apiURL}/users/authenticate/facebook`;
+        return this.http.post<User>(uri, userRegister).pipe(
+            map((user: User) => {
+                // login successful if there's a jwt token in the response
+                if (user && user.token) {
+                    // store user details and jwt token in local storage to keep user
+                    // logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.currentUserSubject.next(user);
+                }
+                return user;
+            })
+        );
     }
 
     loginWithFacebook(): Observable<User> {
@@ -92,21 +73,13 @@ export class AuthenticationService {
                 .then((res: FacebookLoginResponse) => {
                     // The connection was successful
                     if (res.status === 'connected') {
-
                         // Get user infos from the API
                         this.fb.api('/me?fields=first_name,last_name,email', []).
                             then((user: { first_name: any; last_name: any; email: any; }) => {
-
                                 // Get the connected user details
                                 const firstName = user.first_name;
                                 const lastName = user.last_name;
                                 const email = user.email;
-
-                                console.log('=== USER INFOS ===');
-                                console.log('Name : ' + name);
-                                console.log('Email : ' + email);
-                                // => Open user session and redirect to the next page
-                                // Try to login on the api
                                 const userFacebook = {
                                     email,
                                     firstName,
