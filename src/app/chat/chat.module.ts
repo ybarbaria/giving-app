@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatPage } from './chat.page';
-import { ChatDetailsPage } from './chat-details/chat-details.page';
 
 @NgModule({
   imports: [
@@ -13,9 +12,6 @@ import { ChatDetailsPage } from './chat-details/chat-details.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: ChatPage }])
   ],
-  entryComponents: [
-    ChatDetailsPage
-  ],
-  declarations: [ChatPage, ChatDetailsPage]
+  declarations: [ChatPage]
 })
 export class ChatPageModule { }

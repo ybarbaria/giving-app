@@ -22,9 +22,10 @@ import { File } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { TabsService } from './tabs/tabs.service';
 
 const config: SocketIoConfig = {
-  url: 'https://sleepy-thicket-33930.herokuapp.com', options: {
+  url: 'http://192.168.43.19:8080', options: {
     query: 'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZDE4NDJkMDE2NzAwYzU0NDRlYTU4MjgiLCJpYXQiOjE1NjMzNDkxMzh9.hVGgDk3wZTl5XUuX0goz2yE-2uIh9f75X8Kie2g7qCc'
   }
 };
@@ -51,7 +52,8 @@ const config: SocketIoConfig = {
     File,
     WebView,
     FilePath,
-    Facebook
+    Facebook,
+    TabsService
   ],
   bootstrap: [AppComponent]
 })

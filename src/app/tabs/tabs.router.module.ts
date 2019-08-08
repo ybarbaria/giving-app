@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { ChatDetailsPage } from '../chat/chat-details/chat-details.page';
 
 const routes: Routes = [
   {
@@ -31,6 +32,15 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../chat/chat.module#ChatPageModule'
+          },
+          {
+            path: 'details',
+            children: [
+              {
+                path: '',
+                loadChildren: '../chat/chat-details/chat-details.module#ChatDetailsPageModule'
+              }
+            ]
           }
         ]
       },

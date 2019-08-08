@@ -19,6 +19,10 @@ export class MessagesService {
         return this.api.getMessages(idUser);
     }
 
+    public getMessagesBetweenUsers(idUser: string, idUser2: string): Observable<Array<Message>> {
+        return this.api.getMessagesBetweenUsers(idUser, idUser2);
+    }
+
     public getNewMessages(idUser: string): Observable<Message> {
         return new Observable<Message>((observer) => {
             this.socket.on('messages-added' + idUser, (message: Message) => {

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { GivesService } from '../_services/gives.service';
 import { Give } from '../_models';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { GiveDetailsPage } from './give-details/give-details.page';
 import { AuthenticationService } from '../_services/auth.service';
+import { NavigationExtras } from '@angular/router';
 @Component({
   selector: 'app-gives',
   templateUrl: 'gives.page.html',
@@ -19,7 +20,8 @@ export class GivesPage {
   constructor(socket: Socket,
     private givesService: GivesService,
     private modalCtrl: ModalController,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationService,
+    private navCtrl: NavController) {
     this.socket = socket;
 
     // all object available
@@ -54,5 +56,14 @@ export class GivesPage {
 
   removeFromWishList(give: Give) {
     this.givesService.unwish(give._id, this.authService.currentUserValue._id).subscribe();
+  }
+
+  openChat(give: Give) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        idUser: give.user
+      }
+    };
+    this.navCtrl.navigateForward('/tabs/chat/details', navigationExtras);
   }
 }

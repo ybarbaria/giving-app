@@ -68,6 +68,13 @@ export class RestApiService {
             );
     }
 
+    getMessagesBetweenUsers(idUser1: string, idUser2: string): Observable<Message[]> {
+        return this.http.get<Array<Message>>(this.apiURL + '/messages/user/' + idUser1 + '/with/' + idUser2)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     sendMessage(message: Message): Observable<Message> {
         return this.http.post<Message>(this.apiURL + '/messages/', JSON.stringify(message), this.httpOptions).pipe(
             catchError(this.handleError)
