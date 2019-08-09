@@ -3,12 +3,12 @@ import { Socket } from 'ngx-socket-io';
 import { MessagesService } from '../_services/messages.service';
 import { ModalController } from '@ionic/angular';
 import { AuthenticationService } from '../_services/auth.service';
-import { User, Message } from '../_models';
-import { GivesService } from '../_services/gives.service';
+import { User, Message, UserMessage } from '../_models';
 import { UserService } from '../_services/user.service';
 
 import * as _ from 'lodash';
 import { ChatDetailsPage } from './chat-details/chat-details.page';
+import { ChatDetailsModalPage } from './chat-details/chat-details-modal.page';
 
 @Component({
   selector: 'app-chat',
@@ -21,8 +21,8 @@ export class ChatPage {
   messages: Message[];
   message: Message = new Message();
   text: string;
-  usersId: string[] = [];
-  users: UserMessage[] = [];
+  usersId = [];
+  users = [];
 
   constructor(socket: Socket,
     private usersService: UserService,
@@ -32,7 +32,7 @@ export class ChatPage {
     this.socket = socket;
     this.currentUser = this.authService.currentUserValue;
 
-    // all object available 
+    // all object available
     this.messagesService.getMessages(this.currentUser._id).subscribe((messages) => {
       this.messages = messages;
       if (this.messages.length) {
@@ -74,21 +74,13 @@ export class ChatPage {
     mess = _.orderBy(mess, 'createdDate');
 
     const modal = await this.modalCtrl.create({
-      component: ChatDetailsPage,
+      component: ChatDetailsModalPage,
       componentProps: { user: userModal, messages: mess }
     });
     return await modal.present();
   }
 }
 
-class UserMessage extends User {
-  newMessage: number;
-  constructor(user: User) {
-    super();
-    this._id = user._id;
-    this.username = user.username;
-    this.newMessage = null;
-  }
-}
+
 
 

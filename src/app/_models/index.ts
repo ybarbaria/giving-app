@@ -35,3 +35,14 @@ export class Message {
     sender: string;
     receiver: string;
 }
+
+export class UserMessage extends User {
+    newMessage: number;
+    constructor(user: User) {
+        super();
+        this._id = user._id;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.newMessage = null;
+    }
+}

@@ -6,7 +6,7 @@
     ion-content {
         margin-bottom: 60px;
         clear: both;
-        min-height: 400px;
+        max-height: calc(100% - 60px);
     }
 
     .user_name {

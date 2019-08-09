@@ -36,17 +36,7 @@ export class GiveDetailsPage {
         this.givesService.unwish(give._id, this.authService.currentUserValue._id).subscribe();
     }
 
-    // async openMessageModal() {
-    //     const modal = await this.modalCtrl.create({
-    //         component: GiveDetailsPage,
-    //         componentProps: { give: giveModal, isWish: wish }
-    //     });
-    //     return await modal.present();
-    // }
-
-    async openMessageModal() {
-        // this.navCtrl.navigateForward('/chat');
-        // this.navCtrl.navigateForward(`/tabs/chat`);
+    async openChatDetailsPage() {
         this.modalCtrl.dismiss().then(
             () => {
                 const navigationExtras: NavigationExtras = {
@@ -57,10 +47,5 @@ export class GiveDetailsPage {
                 this.navCtrl.navigateForward('/tabs/chat/details', navigationExtras);
             }
         );
-        // userModal.newMessage = null;
-        // let mess = _.forEach(this.messages, (m) =>
-        //     m.receiver === userModal._id || m.sender === userModal._id
-        // );
-        // mess = _.orderBy(mess, 'createdDate');
     }
 }

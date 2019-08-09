@@ -1,7 +1,6 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+import { Component, ViewChild } from '@angular/core';
 import { MessagesService } from '../../_services/messages.service';
-import { ModalController, NavParams, IonContent } from '@ionic/angular';
+import { ModalController, IonContent } from '@ionic/angular';
 import { AuthenticationService } from '../../_services/auth.service';
 import { User, Message } from '../../_models';
 import { ActivatedRoute } from '@angular/router';
