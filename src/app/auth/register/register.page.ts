@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../_services/auth.service';
 import { LoadingController } from '@ionic/angular';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { User } from 'src/app/_models';
 
 @Component({
   selector: 'app-register',
@@ -68,7 +69,13 @@ export class RegisterPage implements OnInit {
 
   register() {
     this.showLoader();
-    this.authService.register(this.registerForm.value).subscribe(() => {
+    const register = new User();
+    register.email = this.registerForm.value.email;
+    register.firstName = this.registerForm.value.firstName;
+    register.lastName = this.registerForm.value.lastName;
+    register.password = this.registerForm.value.passwordForm.password;
+
+    this.authService.register(register).subscribe(() => {
       this.hideLoader();
       this.router.navigateByUrl('home');
     });

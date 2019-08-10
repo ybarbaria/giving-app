@@ -1,14 +1,12 @@
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    background-color: black !important;
-}
-
 ion-button {
+    // TODO make a variable of this color
     --background: #062f77;
 }
 
 ion-label {
     text-align: center;
+}
+
+h3 {
+    color: #062f77;
 }

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../_services/auth.service';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { NavController } from '@ionic/angular';
 
 @Component({
     templateUrl: 'login.page.html',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
     error = '';
 
     constructor(
+        public navCtrl: NavController,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService
@@ -28,7 +30,7 @@ export class LoginComponent implements OnInit {
     }
 
     login(form) {
-        this.authenticationService.login(form.value.mail, form.value.password).subscribe((res) => {
+        this.authenticationService.login(form.value.email, form.value.password).subscribe((res) => {
             this.router.navigateByUrl(this.returnUrl);
         });
     }
@@ -40,5 +42,9 @@ export class LoginComponent implements OnInit {
             },
             (err) => { console.log(err); }
         );
+    }
+
+    goToRegister() {
+        this.navCtrl.navigateRoot('/register');
     }
 }

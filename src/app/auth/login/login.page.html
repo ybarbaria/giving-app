@@ -8,7 +8,7 @@
                     </div>
                     <div padding>
                         <ion-item>
-                            <ion-input name="mail" type="email" placeholder="your@email.com" ngModel required>
+                            <ion-input name="email" type="email" placeholder="your@email.com" ngModel required>
                             </ion-input>
                         </ion-item>
                         <ion-item>
@@ -17,24 +17,37 @@
                         </ion-item>
                     </div>
                     <div padding>
-                        <ion-button type="submit" [disabled]="form.invalid" expand="block">Login
+                        <ion-button type="submit" icon-left size="medium" expand="full" shape="round"
+                            [disabled]="!form.valid" tappable>
+                            <ion-icon name="log-in"></ion-icon>
+                            Sign-in
                         </ion-button>
-                    </div>
-                    <div padding>
-                        <ion-button (click)="loginWithFacebook()" expand="block">Login with
+                        <!-- <ion-button type="submit" [disabled]="form.invalid" expand="block">Login
+                        </ion-button> -->
+                        <p text-center>
+                            <ion-text>
+                                Or Sign-in with
+                            </ion-text>
+                        </p>
+                        <!-- <ion-button (click)="loginWithFacebook()" expand="block">Login with
                             Facebook
                             <ion-icon slot="start" name="logo-facebook">
                             </ion-icon>
+                        </ion-button> -->
+
+
+
+                        <ion-button shape="round" expand="full" (click)="loginWithFacebook()">
+                            <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
                         </ion-button>
                     </div>
-                    <ion-row>
-                        <div text-center>
-                            <p>
-                                If you don't have an account, please <a routerLink='/register'>
-                                    register</a> first!
-                            </p>
-                        </div>
-                    </ion-row>
+                    <div text-center margin-top>
+                        <span (click)="goToRegister()" tappable>
+                            <ion-text>
+                                New here? <strong>Sign Up</strong>
+                            </ion-text>
+                        </span>
+                    </div>
                 </ion-col>
             </ion-row>
         </ion-grid>

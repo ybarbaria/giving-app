@@ -1,14 +1,14 @@
-import { Component, ViewChild, Input, NgZone } from '@angular/core';
-import { Message, User } from 'src/app/_models';
-import { MessagesService } from 'src/app/_services/messages.service';
+import { Component, ViewChild, Input } from '@angular/core';
+import { User, Message } from 'src/app/_models';
 import { IonContent } from '@ionic/angular';
+import { MessagesService } from 'src/app/_services/messages.service';
 
 @Component({
-  selector: 'app-chat-details-cmp',
-  templateUrl: './chat-details.component.html',
-  styleUrls: ['./chat-details.component.scss']
+  selector: 'app-chat-channel-cmp',
+  templateUrl: './chat-channel.component.html',
+  styleUrls: ['./chat-channel.component.scss'],
 })
-export class ChatDetailsComponent {
+export class ChatChannelComponent {
   @ViewChild(IonContent) content: IonContent;
 
   @Input()
