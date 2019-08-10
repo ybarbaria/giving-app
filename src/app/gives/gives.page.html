@@ -5,16 +5,16 @@
     </button>
   </ion-fab> -->
   <ion-row>
-    <!-- <div class="card-container"> -->
+
     <ion-card (click)="openDetailModal(item)" *ngFor="let item of toGives; let i = index">
-      <ion-card-header>{{item.title}}</ion-card-header>
+      <!-- <ion-card-header>{{item.title}}</ion-card-header> -->
       <ion-card-content>
         <ion-img [src]="'assets/test-img/test1.JPG'"></ion-img>
         <ion-grid>
           <ion-row>
-            {{item.description}}
+            <ion-title color="primary" text-center>{{item.title}}</ion-title>
           </ion-row>
-          <ion-row>
+          <ion-row text-center>
             <ion-col size="6">
               <ion-icon name="heart" class="large-font"></ion-icon>
             </ion-col>
@@ -25,13 +25,7 @@
         </ion-grid>
       </ion-card-content>
     </ion-card>
-    <!-- </div> -->
+
   </ion-row>
 
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
 </ion-content>
