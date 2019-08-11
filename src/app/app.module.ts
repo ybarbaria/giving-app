@@ -26,6 +26,7 @@ import { TabsService } from './tabs/tabs.service';
 import { AuthInterceptor } from './_interceptor/auth.interceptor';
 import { ComponentsModule } from './components/components.module';
 import { ChatChannelComponent } from './components/chat-channel/chat-channel.component';
+import { AutocompleteLocationComponent } from './components/autocomplete-location/autocomplete-location.component';
 
 const config: SocketIoConfig = {
   url: 'http://192.168.43.19:8080', options: {
@@ -35,7 +36,7 @@ const config: SocketIoConfig = {
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
-  entryComponents: [ChatChannelComponent],
+  entryComponents: [ChatChannelComponent, AutocompleteLocationComponent],
   imports: [BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),

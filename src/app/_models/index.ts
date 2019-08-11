@@ -3,7 +3,7 @@ export class Give {
     title: string;
     type: string;
     createdDate: Date;
-    // location: TODO add geonJson
+    location: Location;
     description: string;
     status: string;
     user: string;
@@ -22,7 +22,7 @@ export class User {
     email: string;
     token?: string;
     phone: number;
-    address: string;
+    address: Location;
     messages: Array<Message>;
     wishGives: Array<Give>;
     type: string;
@@ -45,4 +45,19 @@ export class UserMessage extends User {
         this.lastName = user.lastName;
         this.newMessage = null;
     }
+}
+
+export class Location {
+    formattedAddress: string;
+    geometry: Geometry;
+}
+
+export class Geometry {
+    type: string;
+    coordinates: Point;
+}
+
+export class Point {
+    lat: number;
+    long: number;
 }

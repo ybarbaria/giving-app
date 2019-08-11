@@ -73,7 +73,8 @@
     "protractor": "~5.4.0",
     "ts-node": "~8.3.0",
     "tslint": "~5.17.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "@types/googlemaps": "^3.29.2"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -94,7 +95,8 @@
         "APP_NAME": "Giving",
         "FACEBOOK_HYBRID_APP_EVENTS": "false",
         "FACEBOOK_ANDROID_SDK_VERSION": "5.0.2"
-      }
+      },
+      "cordova-plugin-geolocation": {}
     },
     "platforms": [
       "android",

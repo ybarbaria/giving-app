@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { GivesService } from '../_services/gives.service';
-import { Give } from '../_models';
-import { ModalController, NavController } from '@ionic/angular';
+import { Give, Location } from '../_models';
+import { ModalController, NavController, IonSearchbar } from '@ionic/angular';
 import { GiveDetailsPage } from './give-details/give-details.page';
 import { AuthenticationService } from '../_services/auth.service';
 import { NavigationExtras } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-gives',
   templateUrl: 'gives.page.html',
@@ -13,20 +15,28 @@ import { NavigationExtras } from '@angular/router';
 })
 export class GivesPage {
 
+  @ViewChild('searchBar') searchBar: IonSearchbar;
+  filterLocation: Location;
+  filterCategorie: string;
+  filterKm = 100;
   toGives: Give[] = [];
-  private socket: Socket;
+  givesSaved: Give[] = [];
+
   private wishes: Give[] = [];
 
-  constructor(socket: Socket,
-    private givesService: GivesService,
+  get userId(): string {
+    return this.authService.currentUserValue._id;
+  }
+
+  constructor(private givesService: GivesService,
     private modalCtrl: ModalController,
     private authService: AuthenticationService,
     private navCtrl: NavController) {
-    this.socket = socket;
 
     // all object available
     this.givesService.getGives().subscribe((gives) => {
       this.toGives = gives;
+      this.givesSaved = gives;
     });
     // wishlist of the user
     this.givesService.getWishes(this.authService.currentUserValue._id).subscribe((gives) => {
@@ -65,5 +75,26 @@ export class GivesPage {
       }
     };
     this.navCtrl.navigateForward('/tabs/chat/details', navigationExtras);
+  }
+
+  launchSearch() {
+    const term = this.searchBar.value;
+
+
+    if (term === '') {
+      this.toGives = this.givesSaved;
+    } else {
+      this.givesService.search(this.searchBar.value).subscribe(
+        (gives) => this.toGives = gives
+      );
+    }
+  }
+
+  locationChanged(location: Location) {
+    this.filterLocation = location;
+  }
+
+  categorieChanged(cat: string) {
+    this.filterCategorie = cat;
   }
 }

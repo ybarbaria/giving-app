@@ -1,20 +1,18 @@
-<ion-content>
-  <!-- <ion-fab top left>
-    <button ion-fab mini>
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab> -->
-  <ion-row>
+<!-- <ion-content>
+  <ion-toolbar>
+    <ion-searchbar #searchBar (ionChange)="launchSearch()"></ion-searchbar>
+  </ion-toolbar>
 
+  <ion-row>
     <ion-card (click)="openDetailModal(item)" *ngFor="let item of toGives; let i = index">
-      <!-- <ion-card-header>{{item.title}}</ion-card-header> -->
+      <ion-card-header>{{item.title}}</ion-card-header> 
       <ion-card-content>
         <ion-img [src]="'assets/test-img/test1.JPG'"></ion-img>
         <ion-grid>
           <ion-row>
             <ion-title color="primary" text-center>{{item.title}}</ion-title>
           </ion-row>
-          <ion-row text-center>
+          <ion-row text-center *ngIf="userId !== item.user">
             <ion-col size="6">
               <ion-icon name="heart" class="large-font"></ion-icon>
             </ion-col>
@@ -25,7 +23,74 @@
         </ion-grid>
       </ion-card-content>
     </ion-card>
-
   </ion-row>
+</ion-content> -->
 
-</ion-content>
+
+<ion-menu side="end" (ionWillClose)="launchSearch()">
+  <ion-content>
+    <ion-select interface="popover" placeholder="Categorie" (value)="categorieChanged($event)">
+      <ion-select-option value="art-deco">Art and deco</ion-select-option>
+      <ion-select-option value="beauty-hygiene">Beauty - Hygiene</ion-select-option>
+      <ion-select-option value="books-movies-music">Books, movies and music</ion-select-option>
+      <ion-select-option value="clothing">Clothing</ion-select-option>
+      <ion-select-option value="diy">DIY</ion-select-option>
+      <ion-select-option value="electronic">Electronic</ion-select-option>
+      <ion-select-option value="fashion">Fashion Accessories</ion-select-option>
+      <ion-select-option value="forbaby">For baby</ion-select-option>
+      <ion-select-option value="furniture">Furniture</ion-select-option>
+      <ion-select-option value="games-toys">Games, Toys</ion-select-option>
+      <ion-select-option value="home-appliance">Home appliance</ion-select-option>
+      <ion-select-option value="home-cooking">Home cooking</ion-select-option>
+      <ion-select-option value="shoes">Shoes</ion-select-option>
+      <ion-select-option value="sport">Sport</ion-select-option>
+      <ion-select-option value="animal">Animal stuff</ion-select-option>
+    </ion-select>
+
+    <app-autocomplete-location placeholder="Where ?" (location)="locationChanged($event)"></app-autocomplete-location>
+
+    <ion-range min="0" max="200" step="10" pin="true" color="secondary" [(value)]="filterKm">
+      <ion-label slot="start">
+        Km max
+      </ion-label>
+    </ion-range>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" main>
+  <ion-header>
+    <ion-toolbar>
+      <ion-searchbar mode="ios" #searchBar (ionChange)="launchSearch()">
+      </ion-searchbar>
+      <ion-buttons slot="end">
+        <ion-menu-toggle>
+          <ion-button>
+            <ion-icon slot="icon-only" name="menu"></ion-icon>
+          </ion-button>
+        </ion-menu-toggle>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-row>
+      <ion-card mode="ios" (click)="openDetailModal(item)" *ngFor="let item of toGives; let i = index">
+        <ion-card-content>
+          <ion-img [src]="'assets/test-img/test1.JPG'"></ion-img>
+          <ion-grid>
+            <ion-row>
+              <ion-title color="primary" text-center>{{item.title}}</ion-title>
+            </ion-row>
+            <ion-row text-center *ngIf="userId !== item.user">
+              <ion-col size="6">
+                <ion-icon name="heart" class="large-font"></ion-icon>
+              </ion-col>
+              <ion-col size="6">
+                <ion-icon name="text" class="large-font" (click)="openChat(item);$event.stopPropagation()"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-content>
+</div>

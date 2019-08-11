@@ -6,8 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { GivesPage } from './gives.page';
 import { GiveDetailsPage } from './give-details/give-details.page';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ChatDetailsPage } from '../chat/chat-details/chat-details.page';
-import { ChatPageModule } from '../chat/chat.module';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -15,6 +14,7 @@ import { ChatPageModule } from '../chat/chat.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentsModule,
     RouterModule.forChild([{ path: '', component: GivesPage }])
   ],
   entryComponents: [

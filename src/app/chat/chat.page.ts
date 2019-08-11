@@ -52,17 +52,9 @@ export class ChatPage {
     });
 
     this.messagesService.getNewMessages(this.currentUser._id).subscribe((mess) => {
-      (_.find(this.users, (u) => u._id === mess.sender)).newMessage++;
-      this.messages.push(mess);
+      // (_.find(this.users, (u) => u._id === mess.sender)).newMessage++;
+      // this.messages.push(mess);
 
-    });
-
-    this.messagesService.getUpdatedMessages(this.currentUser._id).subscribe((mess) => {
-      this.messages.find((message) => message._id === mess._id).text = mess.text;
-    });
-
-    this.messagesService.getDeletedMessages(this.currentUser._id).subscribe((mess) => {
-      // this.messages.remove((message) => message._id === mess._id).text = mess.text;
     });
   }
 

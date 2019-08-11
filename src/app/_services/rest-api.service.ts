@@ -22,7 +22,14 @@ export class RestApiService {
 
     constructor(private http: HttpClient) { }
 
-    // Gives API
+    ////////////// Gives API //////////////////
+    search(term: string): Observable<Array<Give>> {
+        return this.http.get<Array<Give>>(this.apiURL + '/gives/search/' + term)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     getGives(): Observable<Array<Give>> {
         return this.http.get<Array<Give>>(this.apiURL + '/gives')
             .pipe(
@@ -30,7 +37,7 @@ export class RestApiService {
             );
     }
 
-    // User API
+    ///////////////// User API ///////////////////////
     getWishes(idUser: string): Observable<Array<Give>> {
         return this.http.get<Array<Give>>(this.apiURL + '/users/' + idUser + '/wishes/')
             .pipe(
@@ -60,7 +67,7 @@ export class RestApiService {
     }
 
 
-    // Messages API
+    ////////////// Messages API //////////////////
     getMessages(idUser: string): Observable<Message[]> {
         return this.http.get<Array<Message>>(this.apiURL + '/messages/user/' + idUser)
             .pipe(

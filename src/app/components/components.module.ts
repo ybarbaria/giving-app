@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChatChannelComponent } from './chat-channel/chat-channel.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { AutocompleteLocationComponent } from './autocomplete-location/autocomplete-location.component';
 
 @NgModule({
   imports: [
@@ -10,8 +11,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     IonicModule.forRoot()
   ],
-  declarations: [ChatChannelComponent],
-  exports: [ChatChannelComponent],
+  declarations: [ChatChannelComponent, AutocompleteLocationComponent],
+  exports: [ChatChannelComponent, AutocompleteLocationComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class ComponentsModule { }

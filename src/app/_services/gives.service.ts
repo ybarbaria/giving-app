@@ -15,6 +15,10 @@ export class GivesService {
         this.socket = socket;
     }
 
+    public search(term: string): Observable<Array<Give>> {
+        return this.api.search(term);
+    }
+
     public getGives(): Observable<Array<Give>> {
         return this.api.getGives();
     }
