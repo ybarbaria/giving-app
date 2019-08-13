@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Give, Message, User } from '../_models';
+import { Give, Message, User, Address } from '../_models';
 
 @Injectable({
     providedIn: 'root'
@@ -23,8 +23,14 @@ export class RestApiService {
     constructor(private http: HttpClient) { }
 
     ////////////// Gives API //////////////////
-    search(term: string): Observable<Array<Give>> {
-        return this.http.get<Array<Give>>(this.apiURL + '/gives/search/' + term)
+    search(address?: Address, term?: string, distanceMax: number = 100): Observable<Array<Give>> {
+        const params = new HttpParams()
+            .set('lat', address ? address.location.coordinates.lat.toString() : null)
+            .set('lng', address ? address.location.coordinates.long.toString() : null)
+            .set('distanceMax', distanceMax.toString())
+            .set('term', term);
+
+        return this.http.get<Array<Give>>(this.apiURL + '/gives/search', { params })
             .pipe(
                 catchError(this.handleError)
             );

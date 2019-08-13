@@ -49,7 +49,7 @@
 
     <app-autocomplete-location placeholder="Where ?" (location)="locationChanged($event)"></app-autocomplete-location>
 
-    <ion-range min="0" max="200" step="10" pin="true" color="secondary" [(value)]="filterKm">
+    <ion-range min="0" max="200" step="10" pin="true" color="secondary" [(ngModel)]="filterKm">
       <ion-label slot="start">
         Km max
       </ion-label>

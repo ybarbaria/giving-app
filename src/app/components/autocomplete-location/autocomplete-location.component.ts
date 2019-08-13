@@ -3,7 +3,7 @@ import {
   AfterViewInit, forwardRef, Output, EventEmitter
 } from '@angular/core';
 import {
-  Location, Geometry
+  Address, Geometry
 } from '../../_models';
 
 // import { Autocomplete } from 'google';
@@ -39,7 +39,7 @@ export class AutocompleteLocationComponent implements AfterViewInit, ControlValu
   }
   private _value: string;
 
-  @Output() location = new EventEmitter<Location>();
+  @Output() location = new EventEmitter<Address>();
 
   private _googleAutocomplete: google.maps.places.Autocomplete;
 
@@ -53,9 +53,9 @@ export class AutocompleteLocationComponent implements AfterViewInit, ControlValu
 
         google.maps.event.addListener(this._googleAutocomplete, 'place_changed', () => {
           const place = this._googleAutocomplete.getPlace();
-          const location: Location = {
-            formattedAddress: place.formatted_address,
-            geometry: {
+          const location: Address = {
+            name: place.formatted_address,
+            location: {
               type: 'point',
               coordinates: {
                 lat: place.geometry.location.lat(),

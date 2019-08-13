@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
 import { RestApiService } from './rest-api.service';
 import { Injectable } from '@angular/core';
-import { Give } from '../_models';
+import { Give, Address } from '../_models';
 
 @Injectable({
     providedIn: 'root'
@@ -15,8 +15,8 @@ export class GivesService {
         this.socket = socket;
     }
 
-    public search(term: string): Observable<Array<Give>> {
-        return this.api.search(term);
+    public search(location?: Address, distanceMax?: number, term?: string): Observable<Array<Give>> {
+        return this.api.search(location, term, distanceMax);
     }
 
     public getGives(): Observable<Array<Give>> {

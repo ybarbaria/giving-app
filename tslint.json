@@ -4,6 +4,7 @@
     "codelyzer"
   ],
   "rules": {
+    "max-line-length": false,
     "variable-name": false,
     "align": false,
     "next-line": false,

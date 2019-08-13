@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { GivesService } from '../_services/gives.service';
-import { Give, Location } from '../_models';
+import { Give, Address } from '../_models';
 import { ModalController, NavController, IonSearchbar } from '@ionic/angular';
 import { GiveDetailsPage } from './give-details/give-details.page';
 import { AuthenticationService } from '../_services/auth.service';
@@ -16,7 +16,7 @@ import { MenuController } from '@ionic/angular';
 export class GivesPage {
 
   @ViewChild('searchBar') searchBar: IonSearchbar;
-  filterLocation: Location;
+  filterLocation: Address;
   filterCategorie: string;
   filterKm = 100;
   toGives: Give[] = [];
@@ -79,22 +79,31 @@ export class GivesPage {
 
   launchSearch() {
     const term = this.searchBar.value;
+    // if (term === '') {
+    //   this.toGives = this.givesSaved;
+    // } else {
+    //   this._searchGives(term);
+    // }
 
-
-    if (term === '') {
-      this.toGives = this.givesSaved;
-    } else {
-      this.givesService.search(this.searchBar.value).subscribe(
-        (gives) => this.toGives = gives
-      );
-    }
+    this._searchGives();
   }
 
-  locationChanged(location: Location) {
+  filterClosed() {
+    // todo manage the filter from the right side (cat, loc, km)
+    this._searchGives();
+  }
+
+  locationChanged(location: Address) {
     this.filterLocation = location;
   }
 
   categorieChanged(cat: string) {
     this.filterCategorie = cat;
+  }
+
+  private _searchGives() {
+    this.givesService.search(this.filterLocation, this.filterKm, this.searchBar.value).subscribe(
+      (gives) => this.toGives = gives
+    );
   }
 }

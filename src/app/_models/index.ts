@@ -3,7 +3,8 @@ export class Give {
     title: string;
     type: string;
     createdDate: Date;
-    location: Location;
+    // address: Address;
+    address: Geometry; // todo : temporary need to fix the db
     description: string;
     status: string;
     user: string;
@@ -47,13 +48,13 @@ export class UserMessage extends User {
     }
 }
 
-export class Location {
-    formattedAddress: string;
-    geometry: Geometry;
+export class Address {
+    name: string;
+    location: Geometry;
 }
 
 export class Geometry {
-    type: string;
+    type = 'Point';
     coordinates: Point;
 }
 
