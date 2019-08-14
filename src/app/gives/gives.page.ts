@@ -17,7 +17,7 @@ export class GivesPage {
 
   @ViewChild('searchBar') searchBar: IonSearchbar;
   filterLocation: Address;
-  filterCategorie: string;
+  filterCategory: string;
   filterKm = 100;
   toGives: Give[] = [];
   givesSaved: Give[] = [];
@@ -97,8 +97,8 @@ export class GivesPage {
     this.filterLocation = location;
   }
 
-  categorieChanged(cat: string) {
-    this.filterCategorie = cat;
+  categoryChanged(cat: string) {
+    this.filterCategory = cat;
   }
 
   private _searchGives() {
