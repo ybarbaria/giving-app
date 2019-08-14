@@ -53,7 +53,7 @@ export class GiveDetailsPage {
 
     showMapWithGive() {
         this.map = new Map('map', { attributionControl: false });
-        tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attributions: '',
             maxZoom: 18
         }).addTo(this.map);

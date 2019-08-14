@@ -3,8 +3,8 @@ export class Give {
     title: string;
     type: string;
     createdDate: Date;
-    // address: Address;
-    address: Geometry; // todo : temporary need to fix the db
+    address: Address;
+    // address: Geometry; // todo : temporary need to fix the db
     description: string;
     status: string;
     user: string;
