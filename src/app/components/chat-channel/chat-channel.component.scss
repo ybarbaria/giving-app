@@ -1,4 +1,5 @@
 :host {
+    // TODO clean et essayer de récupérer les colors pour en faire des variables sass
     display: block;
     height: 100%;
     width: 100%;
@@ -14,11 +15,11 @@
     }
 
     .message {
-        padding: 10px !important;
+        padding: 10px;
         transition: all 250ms ease-in-out;
-        border-radius: 10px !important;
-        margin-top: 18px !important;
-        margin-bottom: 4px !important;
+        border-radius: 10px;
+        margin-top: 18px;
+        margin-bottom: 4px;
     }
 
     .message-mine {

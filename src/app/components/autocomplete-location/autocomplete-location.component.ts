@@ -22,6 +22,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
     }
   ]
 })
+// TODO trouver un moyen de ralonger le delay de l'appel à l'api google sinon tout court.
 export class AutocompleteLocationComponent implements AfterViewInit, ControlValueAccessor {
   @Input() placeholder: string;
 

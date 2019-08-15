@@ -1,3 +1,11 @@
+<!-- 
+  - options à définir, report un utilisateurs pour propros ingénieur, en signalant la conversation
+  - gérer la réception d'un socketjs donc d'un nouveau message, pastille pres de la ligne de l'user qui a envoyé un message et pastilles sur la tab chat. 
+  - chat details toujours le même pb du scroll qui ne descend pas jusqu'a en bas
+  - chat details modifier le footer créé un footer qui gère bien le fait qu'un message passe dessous. 
+  
+ -->
+
 <ion-content>
   <ion-list lines="none">
     <ion-item *ngFor="let item of users; let i = index" (click)="openDetailModal(item)">
