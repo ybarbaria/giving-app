@@ -1,9 +1,9 @@
-<ion-content>
+<ion-content padding>
 
     <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
         <!-- TODO : ajouter l'upload d'images -->
         <ion-grid>
-            <ion-row>
+            <ion-row justify-content-center>
                 <!-- <ion-label for="title">Title</ion-label> -->
                 <ion-input formControlName="title" class="form-control" placeholder="Title">
                 </ion-input>
@@ -15,16 +15,27 @@
             </ion-row>
             <ion-row>
                 <!-- <ion-label for="title">Category</ion-label> -->
-                <ion-select formControlName="category" class="form-control" placeholder="Category">
-                    <ion-select-option>High-tech</ion-select-option>
-                    <ion-select-option>Clothes</ion-select-option>
-                    <ion-select-option>Lifestyle</ion-select-option>
+                <ion-select interface="popover" formControlName="category" class="form-control" placeholder="Category">
+                    <ion-select-option value="art-deco">Art and deco</ion-select-option>
+                    <ion-select-option value="beauty-hygiene">Beauty - Hygiene</ion-select-option>
+                    <ion-select-option value="books-movies-music">Books, movies and music</ion-select-option>
+                    <ion-select-option value="clothing">Clothing</ion-select-option>
+                    <ion-select-option value="diy">DIY</ion-select-option>
+                    <ion-select-option value="electronic">Electronic</ion-select-option>
+                    <ion-select-option value="fashion">Fashion Accessories</ion-select-option>
+                    <ion-select-option value="forbaby">For baby</ion-select-option>
+                    <ion-select-option value="furniture">Furniture</ion-select-option>
+                    <ion-select-option value="games-toys">Games, Toys</ion-select-option>
+                    <ion-select-option value="home-appliance">Home appliance</ion-select-option>
+                    <ion-select-option value="home-cooking">Home cooking</ion-select-option>
+                    <ion-select-option value="shoes">Shoes</ion-select-option>
+                    <ion-select-option value="sport">Sport</ion-select-option>
+                    <ion-select-option value="animal">Animal stuff</ion-select-option>
                 </ion-select>
                 <!-- <div *ngIf="submitted && createForm.title.errors" class="invalid-feedback">
                                             <div *ngIf="createForm.title.errors.required">Title is required</div>
                                         </div> -->
             </ion-row>
-            <h3 *ngIf="images.length == 0" text-center>Please Select Image!</h3>
             <ion-row>
                 <ion-list>
                     <ion-item *ngFor="let img of images; index as pos" text-wrap>
@@ -43,6 +54,24 @@
                     </ion-item>
                 </ion-list>
             </ion-row>
+            <ion-row>
+                <app-autocomplete-location placeholder="Where ?" (location)="locationChanged($event)">
+                </app-autocomplete-location>
+            </ion-row>
+            <ion-row>
+                <!-- <ion-thumbnail slot="start">
+                    <ion-img *ngIf="imageResponse && imageResponse[0]" [src]="imageResponse[0]"></ion-img>
+                </ion-thumbnail> -->
+                <ion-card *ngFor="let img of imageResponse; index as pos">
+                    <img *ngIf="imageResponse && imageResponse[pos]" [src]="imageResponse[0]">
+                </ion-card>
+                <ion-card *ngIf="!imageResponse || imageResponse.length <= 2">
+                    <ion-icon name="images" tap="getImages()" center full></ion-icon>
+                </ion-card>
+                <!-- <ion-button (click)="getImages()">Choose Images</ion-button> -->
+                <!-- <ion-button (click)="getImgCam()">Choose Images</ion-button> -->
+            </ion-row>
+
             <!-- <div *ngIf="error" class="alert alert-danger">{{error}}</div> -->
         </ion-grid>
     </form>
@@ -50,7 +79,7 @@
 </ion-content>
 
 <ion-footer>
-    <ion-button clear color="white">
+    <ion-button expand="full" color="secondary">
         Save
     </ion-button>
 </ion-footer>

@@ -27,6 +27,7 @@ import { AuthInterceptor } from './_interceptor/auth.interceptor';
 import { ComponentsModule } from './components/components.module';
 import { ChatChannelComponent } from './components/chat-channel/chat-channel.component';
 import { AutocompleteLocationComponent } from './components/autocomplete-location/autocomplete-location.component';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 const config: SocketIoConfig = {
   url: 'http://192.168.43.19:8080', options: {
@@ -59,7 +60,8 @@ const config: SocketIoConfig = {
     WebView,
     FilePath,
     Facebook,
-    TabsService
+    TabsService,
+    ImagePicker
   ],
   bootstrap: [AppComponent]
 })
