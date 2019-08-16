@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, AfterViewInit, OnInit } from '@angular/core';
 import { User, Message } from 'src/app/_models';
 import { IonContent } from '@ionic/angular';
 import { MessagesService } from 'src/app/_services/messages.service';
@@ -17,7 +17,9 @@ export class ChatChannelComponent {
     if (value) {
       this.messagesService.getNewMessages(value._id).subscribe((message) => {
         this.messages.push(message);
-        this.content.scrollToBottom();
+        setTimeout(() => {
+          this.content.scrollToBottom(0);
+        }, 100);
       });
     }
   }
@@ -37,7 +39,9 @@ export class ChatChannelComponent {
       this.messagesService.getMessagesBetweenUsers(this._currentUser._id, value._id).subscribe(
         (messages) => {
           this.messages = messages;
-          this.content.scrollToBottom();
+          setTimeout(() => {
+            this.content.scrollToBottom(0);
+          }, 100);
         }
       );
     }
@@ -57,5 +61,6 @@ export class ChatChannelComponent {
     this.messagesService.sendMessage(this.message).subscribe();
     this.message = new Message();
     this.text = '';
+    this.content.scrollToBottom(0);
   }
 }
