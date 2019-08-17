@@ -1,21 +1,19 @@
 <ion-content padding>
-
-    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-        <!-- TODO : ajouter l'upload d'images -->
+    <form [formGroup]="createForm" (ngSubmit)="createGive()">
+        <ion-title>Give something</ion-title>
         <ion-grid>
             <ion-row justify-content-center>
-                <!-- <ion-label for="title">Title</ion-label> -->
-                <ion-input formControlName="title" class="form-control" placeholder="Title">
+                <ion-input formControlName="title" class="form-control" placeholder="Title" [(ngModel)]="give.title">
                 </ion-input>
             </ion-row>
             <ion-row>
-                <!-- <ion-label for="title">Description</ion-label> -->
-                <ion-textarea formControlName="description" class="form-control" placeholder="Description">
+                <ion-textarea formControlName="description" class="form-control" placeholder="Description"
+                    [(ngModel)]="give.description">
                 </ion-textarea>
             </ion-row>
             <ion-row>
-                <!-- <ion-label for="title">Category</ion-label> -->
-                <ion-select interface="popover" formControlName="category" class="form-control" placeholder="Category">
+                <ion-select interface="popover" formControlName="category" class="form-control" placeholder="Category"
+                    [(ngModel)]="give.category">
                     <ion-select-option value="art-deco">Art and deco</ion-select-option>
                     <ion-select-option value="beauty-hygiene">Beauty - Hygiene</ion-select-option>
                     <ion-select-option value="books-movies-music">Books, movies and music</ion-select-option>
@@ -59,27 +57,26 @@
                 </app-autocomplete-location>
             </ion-row>
             <ion-row>
-                <!-- <ion-thumbnail slot="start">
-                    <ion-img *ngIf="imageResponse && imageResponse[0]" [src]="imageResponse[0]"></ion-img>
-                </ion-thumbnail> -->
-                <ion-card *ngFor="let img of imageResponse; index as pos">
-                    <img *ngIf="imageResponse && imageResponse[pos]" [src]="imageResponse[0]">
+                <ion-card *ngFor="let img of imageUrls; index as pos">
+                    <img *ngIf="imageUrls && imageUrls[pos]" [src]="imageUrls[0]">
+                    <ion-icon name="delete" small color="red"></ion-icon>
                 </ion-card>
-                <ion-card *ngIf="!imageResponse || imageResponse.length <= 2">
-                    <ion-icon name="images" tap="getImages()" center full></ion-icon>
+                <ion-card *ngIf="!imageUrls || imageUrls.length <= 2" (click)="getImages()">
+                    <ion-icon name="images" center full></ion-icon>
                 </ion-card>
-                <!-- <ion-button (click)="getImages()">Choose Images</ion-button> -->
-                <!-- <ion-button (click)="getImgCam()">Choose Images</ion-button> -->
             </ion-row>
-
             <!-- <div *ngIf="error" class="alert alert-danger">{{error}}</div> -->
         </ion-grid>
+
+        <div class="give-footer">
+            <ion-toolbar>
+                <ion-footer>
+                    <ion-button type="submit" icon-left size="medium" expand="full" shape="round" color="secondary">
+                        <ion-icon name="create" tappable></ion-icon>
+                        Save
+                    </ion-button>
+                </ion-footer>
+            </ion-toolbar>
+        </div>
     </form>
-
 </ion-content>
-
-<ion-footer>
-    <ion-button expand="full" color="secondary">
-        Save
-    </ion-button>
-</ion-footer>

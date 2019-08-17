@@ -3,7 +3,7 @@ import {
   AfterViewInit, forwardRef, Output, EventEmitter
 } from '@angular/core';
 import {
-  Address, Geometry
+  Address
 } from '../../_models';
 
 // import { Autocomplete } from 'google';
@@ -57,11 +57,11 @@ export class AutocompleteLocationComponent implements AfterViewInit, ControlValu
           const location: Address = {
             name: place.formatted_address,
             location: {
-              type: 'point',
-              coordinates: {
-                lat: place.geometry.location.lat(),
-                long: place.geometry.location.lng()
-              }
+              type: 'Point',
+              coordinates: [
+                place.geometry.location.lng(),
+                place.geometry.location.lat()
+              ]
             }
           };
           this.location.emit(location);

@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../_services/auth.service';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { NavController } from '@ionic/angular';
 
+// TODO : Validation des champs, améliorer le desgn
 @Component({
     templateUrl: 'login.page.html',
     styleUrls: ['./login.page.scss']

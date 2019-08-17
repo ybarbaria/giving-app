@@ -3,16 +3,14 @@ import { AuthenticationService } from 'src/app/_services/auth.service';
 import { GivesService } from 'src/app/_services/gives.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { File, FileEntry } from '@ionic-native/File/ngx';
-import { HttpClient } from '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { ActionSheetController, Platform, LoadingController } from '@ionic/angular';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
+import { Router } from '@angular/router';
 // import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
-
-import { finalize } from 'rxjs/operators';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { Address } from 'src/app/_models';
+import { Address, Give } from 'src/app/_models';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -21,12 +19,13 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
     styleUrls: ['create-give.page.scss']
 })
 export class GiveCreatePage implements OnInit {
+    give: Give = new Give();
     firstImg: null;
     secondImg: null;
     thirdImg: null;
 
     options: any;
-    imageResponse: [SafeUrl]; // todo delete apres tests
+    imageUrls = []; // todo delete apres tests
 
     createForm: FormGroup;
     images = [];
@@ -34,8 +33,9 @@ export class GiveCreatePage implements OnInit {
         private imagePicker: ImagePicker,
         private camera: Camera,
         public dms: DomSanitizer,
-        private authService: AuthenticationService,
-        private giveService: GivesService,
+        private _giveService: GivesService,
+        private _authService: AuthenticationService,
+        private _router: Router,
         private file: File,
         private webview: WebView,
         private actionSheetController: ActionSheetController,
@@ -43,6 +43,9 @@ export class GiveCreatePage implements OnInit {
         private loadingController: LoadingController,
         private ref: ChangeDetectorRef,
         private filePath: FilePath) {
+
+        this.give = new Give();
+        this.give.user = this._authService.currentUserValue._id;
     }
 
     ngOnInit() {
@@ -65,6 +68,15 @@ export class GiveCreatePage implements OnInit {
     }
 
     createGive() {
+        this._giveService.create(this.give).subscribe(
+            (newGive) => {
+                console.log(newGive);
+                this._router.navigateByUrl('home');
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
         // TODO : upload des images et sauvegarde de l'objet give
         // give status moderate
         // adreess provenant de l'autocomplete api google.
@@ -83,17 +95,9 @@ export class GiveCreatePage implements OnInit {
             outputType: 1
         };
         this.imagePicker.getPictures(this.options).then((results) => {
-            // console.log(results);
-
-            // for (let index = 0; index < 3; index++) {
-            //     const element = results[index];
-            // }
             results.forEach((imgb64) => {
-                // console.log(img);
-                this.imageResponse.push(this.dms.bypassSecurityTrustUrl('data:image/jpeg;base64,' + imgb64));
+                this.imageUrls.push(this.dms.bypassSecurityTrustUrl('data:image/jpeg;base64,' + imgb64));
             });
-
-            // results
         }, (err) => {
             console.log(err);
         });
@@ -122,6 +126,7 @@ export class GiveCreatePage implements OnInit {
     }
 
     locationChanged(location: Address) {
-
+        this.give.address = location.name;
+        this.give.location = location.location;
     }
 }

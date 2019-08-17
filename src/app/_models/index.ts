@@ -3,7 +3,9 @@ export class Give {
     title: string;
     type: string;
     createdDate: Date;
-    address: Address;
+    location: Geometry;
+    address: string;
+    category: string;
     // address: Geometry; // todo : temporary need to fix the db
     description: string;
     status: string;
@@ -55,10 +57,10 @@ export class Address {
 
 export class Geometry {
     type = 'Point';
-    coordinates: Point;
+    coordinates: Array<number>;
 }
 
-export class Point {
-    lat: number;
-    long: number;
-}
+// export class Point {
+//     lat: number;
+//     long: number;
+// }

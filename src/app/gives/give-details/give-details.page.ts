@@ -64,44 +64,41 @@ export class GiveDetailsPage {
         //     console.log('found you');
         // });
 
-        const geojsonFeature = {
-            type: 'Feature',
-            properties: {
-                name: this.give.title,
-                popupContent: this.give.title
-            },
-            geometry: this.give.address
-        };
-
-        const koalaIcon = icon({
-            iconUrl: 'assets/koala.png',
-            iconSize: [64, 64], // size of the icon
-            iconAnchor: [10, 10], // point of the icon which will correspond to marker's location
-            popupAnchor: [10, 10] // point from which the popup should open relative to the iconAnchor
-        });
-
-        const markerLayer = geoJSON(geojsonFeature, {
-            pointToLayer: (feature, latlng) => {
-                return marker(latlng, { icon: koalaIcon });
-            },
-            onEachFeature: (feature, layer) => {
-                // does this feature have a property named popupContent?
-                if (feature.properties && feature.properties.popupContent) {
-                    layer.bindPopup(feature.properties.popupContent);
+        if (this.give.location) {
+            const geojsonFeature = {
+                type: 'Feature',
+                properties: {
+                    name: this.give.title,
+                    popupContent: this.give.title
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: this.give.location.coordinates
                 }
-            }
-        }).addTo(this.map);
+            };
+            const koalaIcon = icon({
+                iconUrl: 'assets/koala.png',
+                iconSize: [32, 32], // size of the icon
+                iconAnchor: [10, 10], // point of the icon which will correspond to marker's location
+                popupAnchor: [10, 10] // point from which the popup should open relative to the iconAnchor
+            });
 
-        this.map.fitBounds(markerLayer.getBounds());
-        this.map.setZoom(16);
+            const markerLayer = geoJSON(geojsonFeature, {
+                pointToLayer: (feature, latlng) => {
+                    return marker(latlng, { icon: koalaIcon });
+                },
+                onEachFeature: (feature, layer) => {
+                    if (feature.properties && feature.properties.popupContent) {
+                        layer.bindPopup(feature.properties.popupContent);
+                    }
+                }
+            }).addTo(this.map);
+            this.map.fitBounds(markerLayer.getBounds());
+            this.map.setZoom(16);
+        }
 
-        // const markerBounds = latLngBounds(138.5980224609375,
-        //     -34.92478600243492);
-        // this.map.fitBounds(markerBounds);
-
-        // marker([-104.99404, 39.75621], { icon: koalaMarker }).addTo(this.map);
-
-        // geoJSON(geojsonFeature).addTo(this.map);
+        // TODO Fix throw error ERROR Error: Bounds are not valid.
+        // at NewClass.fitBounds (leaflet-src.js:3286)
     }
 
     ionViewDidEnter() {

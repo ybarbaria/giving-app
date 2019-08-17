@@ -25,8 +25,8 @@ export class RestApiService {
     ////////////// Gives API //////////////////
     search(address?: Address, term?: string, distanceMax: number = 100): Observable<Array<Give>> {
         const params = new HttpParams()
-            .set('lat', address ? address.location.coordinates.lat.toString() : null)
-            .set('lng', address ? address.location.coordinates.long.toString() : null)
+            .set('lng', address ? address.location.coordinates[0].toString() : null)
+            .set('lat', address ? address.location.coordinates[1].toString() : null)
             .set('distanceMax', distanceMax.toString())
             .set('term', term);
 
@@ -38,6 +38,13 @@ export class RestApiService {
 
     getGives(): Observable<Array<Give>> {
         return this.http.get<Array<Give>>(this.apiURL + '/gives')
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    createGive(give: Give): Observable<Give> {
+        return this.http.post<Give>(this.apiURL + '/gives', give)
             .pipe(
                 catchError(this.handleError)
             );

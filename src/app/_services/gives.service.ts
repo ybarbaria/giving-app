@@ -42,4 +42,8 @@ export class GivesService {
     public unwish(idGive: string, idUser: string) {
         return this.api.unwish(idUser, idGive);
     }
+
+    public create(give: Give) {
+        return this.api.createGive(give);
+    }
 }

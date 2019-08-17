@@ -1,14 +1,19 @@
+ion-content {
+    margin-bottom: 60px;
+    clear: both;
+    max-height: calc(100% - 60px);
+}
+
 ion-select {
     padding-left: 4px;
 }
-
 
 ion-card {
     width: 6rem;
     height: 6rem;
 
     img {
-        width: 5rem;
+        width: 100%;
         height: auto;
     }
 
@@ -16,4 +21,12 @@ ion-card {
         width: 100%;
         height: 100%;
     }
+}
+
+.give-footer {
+    z-index: 1;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
 }
